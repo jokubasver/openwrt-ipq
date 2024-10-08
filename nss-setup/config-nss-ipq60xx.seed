@@ -1,0 +1,126 @@
+# copy to `.config` and run `make defconfig`
+# This builds for the 8devices_mango-dvk ipq60xx target. 
+# To use this config, you must build from https://github.com/jokubasver/openwrt-ipq
+
+# 1. copy this config to root of build folder name it ".config"
+# 2. run `make defconfig`
+#
+# use `make menuconfig` to further customize building just for your target or adding custom packages.
+# Target platform
+CONFIG_TARGET_qualcommax=y
+CONFIG_TARGET_qualcommax_ipq60xx=y
+
+# Uncomment target device you want to build for, set '=y'
+CONFIG_TARGET_qualcommax_ipq60xx_DEVICE_8devices_mango-dvk=y
+
+# Choose your memory profile
+# CONFIG_NSS_MEM_PROFILE_HIGH is not set
+CONFIG_NSS_MEM_PROFILE_MEDIUM=y
+# CONFIG_NSS_MEM_PROFILE_LOW is not set
+
+# CONFIG_ATH11K_MEM_PROFILE_1G is not set
+CONFIG_ATH11K_MEM_PROFILE_512M=y
+# CONFIG_ATH11K_MEM_PROFILE_256M is not set
+
+# CONFIG_IPQ_MEM_PROFILE_1024 is not set
+CONFIG_IPQ_MEM_PROFILE_512=y
+# CONFIG_IPQ_MEM_PROFILE_256 is not set
+CONFIG_KERNEL_IPQ_MEM_PROFILE=512
+
+# Add NSS firmware to ipq60xx targets
+CONFIG_PACKAGE_nss-firmware-default=y
+CONFIG_PACKAGE_nss-firmware-ipq6018=y
+
+# NSS Offloading
+CONFIG_ATH11K_NSS_SUPPORT=y
+CONFIG_ATH11K_NSS_MESH_SUPPORT=y
+CONFIG_PACKAGE_MAC80211_NSS_SUPPORT=y
+
+# Additional NSS packages (VLAN, Multicast Snooping, etc)
+CONFIG_PACKAGE_kmod-qca-nss-drv-vlan-mgr=y
+CONFIG_PACKAGE_kmod-qca-mcs=y
+
+# NSS SQM Traffic Shaping
+CONFIG_PACKAGE_sqm-scripts=y
+CONFIG_PACKAGE_sqm-scripts-nss=y
+
+# Compiler Optimization
+CONFIG_BUILD_PATENTED=y
+CONFIG_CCACHE=y
+CONFIG_DEVEL=y
+CONFIG_EXPERIMENTAL=y
+CONFIG_TOOLCHAINOPTS=y
+CONFIG_TARGET_OPTIONS=y
+CONFIG_TARGET_OPTIMIZATION="-O2 -pipe -mcpu=cortex-a53+crc+crypto"
+CONFIG_TARGET_INIT_PATH="/usr/sbin:/usr/bin:/sbin:/bin:/opt/usr/bin:/opt/bin:/opt/sbin:/opt/usr/sbin"
+CONFIG_USE_GC_SECTIONS=y
+
+# Kernel Config
+CONFIG_COLLECT_KERNEL_DEBUG=y
+CONFIG_KERNEL_PERF_EVENTS=y
+CONFIG_KERNEL_DYNAMIC_DEBUG=y
+CONFIG_KERNEL_ARM_PMU=y
+CONFIG_KERNEL_ARM_PMUV3=y
+CONFIG_KERNEL_PREEMPT_NONE=y
+CONFIG_KERNEL_PREEMPT_NONE_BUILD=y
+
+# SSL Configuration
+CONFIG_PACKAGE_libustream-openssl=y
+CONFIG_PACKAGE_libustream-mbedtls=n
+CONFIG_PACKAGE_libopenssl=y
+CONFIG_LUA_ECO_OPENSSL=y
+CONFIG_LUA_ECO_MBEDTLS=n
+CONFIG_OPENSSL_OPTIMIZE_SPEED=y
+
+# LUCI Config
+CONFIG_PACKAGE_luci=y
+CONFIG_PACKAGE_luci-ssl-openssl=y
+CONFIG_PACKAGE_wpad-mesh-openssl=y
+CONFIG_PACKAGE_wpad-basic-mbedtls=n
+
+# LUCI Applications
+CONFIG_PACKAGE_luci-app-firewall=y
+CONFIG_PACKAGE_luci-app-opkg=y
+CONFIG_PACKAGE_luci-app-sqm=y
+CONFIG_PACKAGE_luci-app-statistics=y
+CONFIG_PACKAGE_luci-app-acme=y
+CONFIG_PACKAGE_luci-app-firewall=y
+CONFIG_PACKAGE_luci-app-nlbwmon=y
+CONFIG_PACKAGE_luci-app-opkg=y
+CONFIG_PACKAGE_luci-app-sqm=y
+CONFIG_PACKAGE_luci-app-statistics=y
+CONFIG_PACKAGE_luci-app-watchcat=y
+CONFIG_PACKAGE_luci-proto-wireguard=y
+
+# Library Optimization
+CONFIG_ZLIB_OPTIMIZE_SPEED=y
+CONFIG_ZSTD_OPTIMIZE_O3=y
+
+# Reduce kernel module size
+CONFIG_ATH11K_DEBUGFS_HTT_STATS=n
+CONFIG_ATH11K_DEBUGFS_STA=n
+CONFIG_ATH11K_THERMAL=n
+
+# Additional kernel modules
+CONFIG_PACKAGE_kmod-fs-vfat=y
+CONFIG_PACKAGE_kmod-fs-f2fs=y
+CONFIG_PACKAGE_kmod-fs-ntfs3=y
+CONFIG_PACKAGE_kmod-nft-bridge=y
+CONFIG_PACKAGE_kmod-usb-storage=y
+CONFIG_PACKAGE_kmod-ramoops=y
+
+# Additional packages
+CONFIG_PACKAGE_iperf3=y
+CONFIG_PACKAGE_htop=y
+CONFIG_PACKAGE_curl=y
+CONFIG_PACKAGE_rsync=y
+CONFIG_PACKAGE_jq=y
+CONFIG_PACKAGE_pigz=y
+CONFIG_PACKAGE_tar=y
+CONFIG_PACKAGE_tcpdump=y
+
+CONFIG_HTOP_LMSENSORS=n
+
+# Prevent opkg from adding custom feeds to /etc/opkg/distfeeds.conf
+CONFIG_FEED_nss_packages=n
+CONFIG_FEED_sqm_scripts_nss=n
