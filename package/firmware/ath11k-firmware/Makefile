@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ath11k-firmware
-PKG_SOURCE_DATE:=2024-10-14
-PKG_SOURCE_VERSION:=15f050122da5ef5bef2cc8c7c19dfb7f98060a49
-PKG_MIRROR_HASH:=e7a89d1570f32552ade539376181494724b5eafb31d00451ff2dcf5a2922a0cb
+PKG_SOURCE_DATE:=2024-10-10
+PKG_SOURCE_VERSION:=80c79c2df162af85dcd3c1b7a43225f0c0bdd18a
+PKG_MIRROR_HASH:=ac7b424cc42f6df722c547169f43a46beab560410fdd8dc17c5a780b97d22d27
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://git.codelinaro.org/clo/ath-firmware/ath11k-firmware.git
+PKG_SOURCE_URL:=https://github.com/jokubasver/upstream-wifi-fw.git
 
 PKG_LICENSE_FILES:=LICENSE.qca_firmware
 
@@ -102,7 +102,7 @@ endef
 define Package/ath11k-firmware-ipq6018/install
 	$(INSTALL_DIR) $(1)/lib/firmware/IPQ6018
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/IPQ6018/hw1.0/2.5.0.1/WLAN.HK.2.5.0.1-03982-QCAHKSWPL_SILICONZ-3/* \
+		$(PKG_BUILD_DIR)/ath11k-firmware/IPQ6018/hw1.0/testing/2.12/WLAN.HK.2.12-01460-QCAHKSWPL_SILICONZ-1/* \
 		$(1)/lib/firmware/IPQ6018/
 endef
 
